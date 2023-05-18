@@ -35,4 +35,4 @@ Dicas:
     Considere utilizar diferentes estruturas de dados para armazenar pacientes de diferentes prioridades, como listas separadas ou uma única lista ordenada por prioridade.
     Lembre-se de tratar os casos em que a estrutura de dados está vazia ou quando o usuário tenta atender um paciente sem que haja pacientes na fila.
 
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
