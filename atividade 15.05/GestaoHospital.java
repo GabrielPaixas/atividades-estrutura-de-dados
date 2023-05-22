@@ -4,6 +4,8 @@ public class GestaoHospital {
         System.out.println("O paciente " + filaPacientes.dequeue().getNome() + " sera atendido");
     }
 
+    
+
     public void organizarPacientes(Fila<Paciente> filaPacientes) {
         Fila<Paciente> prioridade1 = new Fila<>(50);
         Fila<Paciente> prioridade2 = new Fila<>(50);

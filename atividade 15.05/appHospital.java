@@ -13,9 +13,13 @@ public class appHospital {
         pacientes.enqueue(paciente1);
         pacientes.enqueue(paciente2);
 
+        System.out.println(pacientes.size());
+
         gestao.consultarPaciente(pacientes);
         gestao.consultarPaciente(pacientes);
         gestao.consultarPaciente(pacientes);
         gestao.consultarPaciente(pacientes);
+
+        System.out.println(pacientes.size());
     }
 }
