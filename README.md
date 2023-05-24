@@ -36,3 +36,34 @@ Dicas:
     Lembre-se de tratar os casos em que a estrutura de dados está vazia ou quando o usuário tenta atender um paciente sem que haja pacientes na fila.
 
 # ------------------------------------------------------------------------------
+
+# Atividade 17/05
+
+Questão 1. Um supermercado está passando por problemas de organização e espera nas filas
+dos caixas. Como especialista em filas, você foi contratado para ajudar a melhorar o design do
+sistema de filas do supermercado. Proponha um plano de ação para solucionar o problema,
+considerando fatores como tempo médio de espera, número de caixas, distribuição de clientes,
+entre outros.
+
+Questão 2. Em uma empresa de serviços ao cliente, há um alto volume de chamadas recebidas
+diariamente, causando filas e tempos de espera longos para os clientes. Desenvolva uma
+proposta para otimizar o sistema de atendimento, levando em consideração estratégias como
+atendimento prioritário, distribuição equitativa de chamadas entre os atendentes, utilização de
+chatbots, entre outros, a fim de reduzir o tempo de espera dos clientes e melhorar a satisfação
+geral.
+
+Questão 3: Uma empresa de tecnologia está enfrentando problemas com a gestão das filas de
+atendimento do seu suporte técnico. Os clientes têm relatado longos tempos de espera e
+insatisfação com o serviço. Desenvolva um plano para melhorar o sistema de filas de
+atendimento técnico, considerando aspectos como triagem de chamados, encaminhamento
+para especialistas, tempo de atendimento por chamado, entre outros, visando otimizar o
+tempo de espera e aumentar a eficiência do suporte.
+
+Questão 4. Uma cidade está enfrentando problemas com as filas nos pontos de ônibus,
+principalmente em horários de pico. Como especialista em filas, você foi chamado para propor
+soluções que melhorem o fluxo de passageiros e reduzam os tempos de espera. Desenvolva um
+plano que envolva estratégias como aumento do número de ônibus em horários de pico,
+adoção de sistemas de controle de fluxo, criação de filas organizadas nos pontos de embarque,
+entre outras, para melhorar a eficiência do sistema de transporte público da cidade.
+
+# ------------------------------------------------------------------------------
