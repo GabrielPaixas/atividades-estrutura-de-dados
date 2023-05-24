@@ -1,5 +1,3 @@
-import javax.sql.rowset.JoinRowSet;
-
 public class SuperMercado {
     public static void main(String[] args) {
         GerenciarFilas gerencia = new GerenciarFilas();
