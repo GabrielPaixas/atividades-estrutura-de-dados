@@ -1,3 +1,4 @@
+/* 
 public class Fila<T> {
     private T[] elementos;
     private int tamanho;
@@ -5,7 +6,6 @@ public class Fila<T> {
     private int inicio;
     private int fim;
 
-    @SuppressWarnings("unchecked")
     public Fila(int capacidade) {
         this.capacidade = capacidade;
         this.elementos = (T[]) new Object[capacidade];
@@ -57,3 +57,4 @@ public class Fila<T> {
         return elementos[inicio];
     }
 }
+*/

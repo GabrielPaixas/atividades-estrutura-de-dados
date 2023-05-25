@@ -1,26 +1,26 @@
+import java.util.Date;
+
 public class Atendimento {
-    Fila<Chamada> chamadasFila = new Fila<>(50);
     ChatBot chat = new ChatBot();
 
     public void iniciarChamada(Fila<Cliente2> clientes, Fila<Atendente> atendentesFila,
-            Fila<Cliente2> esperaPrioritaria,
-            Fila<Cliente2> esperaComum) {
+        Fila<Cliente2> esperaPrioritaria,
+        Fila<Cliente2> esperaComum, Fila<Chamada> chamadasFila) {
 
         Fila<Atendente> tempAtendentes = new Fila<>(5);
-
         Fila<Cliente2> prioritario = new Fila<>(10);
         Fila<Cliente2> comumFila = new Fila<>(10);
 
-        while(!esperaPrioritaria.isEmpty()){
+        while (!esperaPrioritaria.isEmpty()) {
             prioritario.enqueue(esperaPrioritaria.dequeue());
         }
-        while(!esperaComum.isEmpty()){
+        while (!esperaComum.isEmpty()) {
             comumFila.enqueue(esperaComum.dequeue());
         }
 
         while (!clientes.isEmpty()) {
             Cliente2 cliente = clientes.dequeue();
-            
+
             if (cliente.getPrioritario()) {
                 prioritario.enqueue(cliente);
             } else {
@@ -28,19 +28,18 @@ public class Atendimento {
             }
         }
 
+        Atendente atendenteLivre = null;
+
         while (!atendentesFila.isEmpty()) {
-            if (atendentesFila.front().isDisponivel()) {
-                if(!prioritario.isEmpty()){
-                    System.out.println("atendendo " + prioritario.front().getNome());
-                    chamadasFila.enqueue(new Chamada(prioritario.dequeue(), atendentesFila.front()));
-                }else if(!comumFila.isEmpty()){
-                    chat.atendimentoAutomatico(clientes.front());
-                    chamadasFila.enqueue(new Chamada(comumFila.dequeue(), atendentesFila.front()));
-                }else{
-                    System.out.println("Sem clientes aguardando");
-                }
+            Atendente atendente = atendentesFila.dequeue();
+            if (atendente.isDisponivel()) {
+                atendenteLivre = atendente;
             }
-            tempAtendentes.enqueue(atendentesFila.dequeue());
+            tempAtendentes.enqueue(atendente);
+        }
+        
+        while(!tempAtendentes.isEmpty()){
+            atendentesFila.enqueue(tempAtendentes.dequeue());
         }
 
         while (!prioritario.isEmpty()) {
@@ -50,13 +49,57 @@ public class Atendimento {
             clientes.enqueue(comumFila.dequeue());
         }
 
-        while(!clientes.isEmpty()){
-            if(clientes.front().getPrioritario()){
+        if(atendenteLivre != null){
+            chamadasFila.enqueue(new Chamada(clientes.front(), atendenteLivre, new Date()));
+            System.out.println(clientes.front().getNome() + " esta sendo atendido");
+            clientes.dequeue();
+        }
+
+        while (!clientes.isEmpty()) {
+            if (clientes.front().getPrioritario()) {
                 esperaPrioritaria.enqueue(clientes.dequeue());
-            }else{
+            } else {
                 esperaComum.enqueue(clientes.dequeue());
             }
         }
-        
+
     }
+
+    public void finalizarChamada(Fila<Atendente> atendentes, Fila<Chamada> chamadasFila, String id) {
+        Fila<Atendente> temp = new Fila<>(10);
+        Fila<Chamada> tempChamada = new Fila<>(50);
+    
+        Atendente atendenteEncontrado = new Atendente();
+        
+        // Procura o atendente pelo ID e marca como disponível
+        while (!atendentes.isEmpty()) {
+            Atendente atendente = atendentes.dequeue();
+            if (atendente.getId().equals(id)) {
+                System.out.println("O atendente " + atendente.getNome() + " está disponível");
+                atendente.setDisponivel(true);
+                atendenteEncontrado = atendente;
+            }
+            temp.enqueue(atendente);
+        }
+        
+        // Reenfileira os atendentes
+        while (!temp.isEmpty()) {
+            atendentes.enqueue(temp.dequeue());
+        }
+    
+        // Finaliza chamadas associadas ao atendente encontrado
+        while (!chamadasFila.isEmpty()) {
+            Chamada chamada = chamadasFila.dequeue();
+            if (chamada.getAtendente().equals(atendenteEncontrado)) {
+                chamada.setDataFim(new Date());
+            } else {
+                tempChamada.enqueue(chamada);
+            }
+        }
+        
+        while(!tempChamada.isEmpty()){
+            chamadasFila.enqueue(tempChamada.dequeue());
+        }
+    }
+    
 }
